@@ -18,7 +18,7 @@
                          </div>
                      </div>
                      <div class="col-sm-6">
-                         <div class="mb-3       ">
+                         <div class="mb-3">
                              <label class="form-label">Harga</label>
                              <input type="number" name="harga" class="form-control" value="{{ old('harga') }}">
                              @error('harga')
@@ -26,8 +26,28 @@
                              @enderror
                          </div>
                      </div>
+                     <div class="col-sm-6">
+                         <div class="mb-3">
+                             <label class="form-label">Stok</label>
+                             <input type="number" name="stok" class="form-control" value="{{ old('stok') }}">
+                             @error('harga')
+                                 <div class="form-text text-danger">{{ $message }}</div>
+                             @enderror
+                         </div>
+                     </div>
+                     <div class="col-sm-6">
+                         <div class="mb-3">
+                             <label class="form-label">Kategori</label>
+                             <select class="form-select" aria-label="Default select example" name="kategori">
+                                 <option value="">Pilih di sini</option>
+                                 @foreach ($data_kategori as $item)
+                                 <option value="{{ $item->id_kategori }}">{{ $item->nama_kategori }}</option>
+                                 @endforeach
+                             </select>
+                         </div>
+                     </div>
                      <div class="col-12">
-                        <label class="form-label">Deskripsi</label>
+                         <label class="form-label">Deskripsi</label>
                          <div class="form-floating">
                              <textarea name="deskripsi_product" class="form-control" style="height: 100px"></textarea>
                              <label>Deskripsi Produk</label>

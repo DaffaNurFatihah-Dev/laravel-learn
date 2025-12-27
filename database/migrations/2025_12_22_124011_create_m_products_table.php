@@ -14,11 +14,16 @@ return new class extends Migration
         // sintaks untuk buat tabel product
         Schema::create('tb_product', function (Blueprint $table) {
             $table->id('id_product');
+            $table->string('kode_product');
             $table->String('nama_product');
-            $table->integer('harga');
+            $table->bigInteger('harga');
             $table->text('deskripsi_product');
-            $table->integer('kategori_id');
+            $table->bigInteger('stok');
+            $table->string('gambar')->nullable();
+            $table->unsignedBigInteger('kategori_id');
             $table->timestamps('');
+
+            $table->foreign('kategori_id')->references('id_kategori')->on('tb_kategori')->onDelete('cascade');
         });
     }
 

@@ -36,11 +36,12 @@
                 <thead>
                     <tr>
                         <th scope="col">No</th>
+                        <th scope="col">kode Product</th>
                         <th scope="col">Nama Produk</th>
                         <th scope="col">Harga</th>
                         <th scope="col">Deskripsi Produk</th>
-                        <th scope="col">Created at</th>
-                        <th scope="col">Update at</th>
+                        <th scope="col">Stok</th>
+                        <th scope="col">Kategori</th>
                         <th scope="col">Aksi</th>
                     </tr>
                 </thead>
@@ -48,11 +49,12 @@
                     @forelse ($data_product as $product)
                         <tr>
                             <th scope="row">{{ $loop->iteration }}</th>
+                            <td>{{ $product->kode_product }}</td>
                             <td>{{ $product->nama_product }}</td>
                             <td>{{ $product->harga }}</td>
                             <td>{{ $product->deskripsi_product }}</td>
-                            <td>{{ $product->created_at }}</td>
-                            <td>{{ $product->updated_at }}</td>
+                            <td>{{ $product->stok }}</td>
+                            <td>{{ $product->nama_kategori }}</td>
                             <td>
                                 <a href="/product/{{ $product->id_product }}/edit" class="btn btn-warning">Edit</a>
                                 <!-- Button trigger modal -->
