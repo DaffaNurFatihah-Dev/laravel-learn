@@ -27,6 +27,7 @@
                          </div>
                      </div>
                      <div class="col-12">
+                        <label class="form-label">Deskripsi</label>
                          <div class="form-floating">
                              <textarea name="deskripsi_product" class="form-control" style="height: 100px"></textarea>
                              <label>Deskripsi Produk</label>

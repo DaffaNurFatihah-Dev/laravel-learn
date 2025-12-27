@@ -13,6 +13,7 @@
                         <div class="form-text text-danger">{{ $message }}</div>
                     @enderror
                 </div>
+                <label class="form-label">Deskripsi</label>
                 <div class="form-floating">
                     <textarea name="deskripsi" class="form-control" style="height: 100px">{{ old('deskripsi') }}</textarea>
                     <label>Deskripsi Kategori</label>
