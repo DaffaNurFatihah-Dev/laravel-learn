@@ -1,4 +1,5 @@
  @extends('layouts.master')
+ @section('title', 'Halaman edit kategori')
 
  @section('content')
      <div class="card mt-4">

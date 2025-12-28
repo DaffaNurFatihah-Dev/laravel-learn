@@ -1,4 +1,6 @@
 @extends('layouts.master')
+@section('title', 'Halaman Detail produk')
+
 
 @section('content')
     <h1 class="mt-2">Halaman Kategori Produk</h1>

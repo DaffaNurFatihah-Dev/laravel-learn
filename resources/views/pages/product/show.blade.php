@@ -1,4 +1,5 @@
 @extends('layouts.master')
+@section('title', 'Ini adalah halaman produk kami')
 
 @section('content')
     <h1 class="mt-2">Daftar Produk Kami</h1>
