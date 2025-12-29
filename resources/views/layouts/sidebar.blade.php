@@ -4,7 +4,7 @@
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/">
                 <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-home"></i>
+                    <i class="fas fa-shop"></i>
                 </div>
                 <div class="sidebar-brand-text mx-3">Admin Shop</div>
             </a>
@@ -34,14 +34,14 @@
             <!-- Nav Item - Charts -->
             <li class="nav-item">
                 <a class="nav-link" href="/product">
-                    <i class="fas fa-fw fa-list"></i>
+                    <i class="fas fa-fw fa-cart-shopping"></i>
                     <span>Product</span></a>
             </li>
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
                 <a class="nav-link" href="/kategori">
-                    <i class="fas fa-fw fa-table"></i>
+                    <i class="fas fa-fw fa-tags"></i>
                     <span>Kategori</span></a>
             </li>
 

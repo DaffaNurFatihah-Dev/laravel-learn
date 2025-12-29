@@ -23,7 +23,7 @@
             Produk
             <div class="d-flex gap-3">
                 @if (Request()->keyword)
-                <a href="/product" class="btn btn-primary">Riset Pencarian</a>
+                    <a href="/product" class="btn btn-primary">Riset Pencarian</a>
                 @endif
                 <form class="input-group" style="width: 350px">
                     <input type="text" class="form-control" name="keyword"placeholder="Cari data produk"
@@ -59,8 +59,8 @@
                             <td>
                                 <a href="/product/{{ $product->id_product }}/edit" class="btn btn-warning">Edit</a>
                                 <!-- Button trigger modal -->
-                                <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                                    data-bs-target="#hapus{{ $product->id_product }}">
+                                <button type="button" class="btn btn-danger" data-toggle="modal"
+                                    data-target="#hapus{{ $product->id_product }}">
                                     Hapus
                                 </button>
                                 {{-- <button class="btn btn-danger">Hapus</button> --}}
@@ -87,14 +87,16 @@
                     @csrf
                     @method('DELETE');
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Hapus Item</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <h3 class="modal-title fs-5" id="exampleModalLabel">Hapus Item</h3>
+                        <button type="button" class="close" data-dismiss="modal">
+                            <span>&times;</span>
+                        </button>
                     </div>
                     <div class="modal-body">
                         Apakah anda ingin menghapus item {{ $product->nama_product }}
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
                         <button type="submit" class="btn btn-primary">Hapus</button>
                     </div>
                 </form>

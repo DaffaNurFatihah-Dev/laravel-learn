@@ -6,6 +6,7 @@ use App\Models\M_kategori;
 use App\Models\M_product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class C_product extends Controller
@@ -44,20 +45,27 @@ class C_product extends Controller
     {
         //validasi data inputan
         $request->validate([
-            'nama_product' => 'required|min:8|max:20',
+            'nama_product' => 'required|min:8',
             'harga' => 'required',
             'deskripsi_product' => 'required',
             'stok' => 'required',
             'kategori' => 'required',
+            'gambar' => 'required|image|mimes:jpg,png,jpeg|max:2000'
         ], [
             'nama_product.required' => 'nama product harus di isi',
             'nama_product.min' => 'minimal nama product 8 karakter',
-            'nama_product.max' => 'maksimal nama product 12 karakter',
             'harga.required' => 'harga harus di isi',
             'deskripsi_product.required' => 'deskripsi product harus di isi',
             'stok.required' => 'stok product harus di isi',
-            'kategori.required' => 'kategori product harus di isi'
+            'kategori.required' => 'kategori product harus di isi',
+            'gambar.required' => 'Gambar harus di isi',
+            'gambar.mimes' => 'Format gambar harus jpg, png, jpeg',
+            'gambar.image' => 'Harus berupa image',
+            'gambar.max' => 'Ukuran gambar maksimal 2 MB',
         ]);
+
+        $namaFile = Str::random(5) . '.' . $request->gambar->extension();
+        $request->gambar->storeAs('gambar_product', $namaFile, 'public');
 
         //insert ke db pakai eloquent
         M_product::create([
@@ -66,7 +74,8 @@ class C_product extends Controller
             'harga' => $request->harga,
             'deskripsi_product' => $request->deskripsi_product,
             'kategori_id' => $request->kategori,
-            'stok' => $request->stok
+            'stok' => $request->stok,
+            'gambar' => $namaFile
         ]);
 
         //redirect kalau sudah selesai insert
@@ -101,6 +110,7 @@ class C_product extends Controller
                 'deskripsi_product' => 'required',
                 'stok' => 'required',
                 'kategori' => 'required',
+                'gambar' => 'image|mimes:jpg,png,jpeg|max:2000'
             ],
             [
                 'nama_product.required' => 'nama produk harus di isi',
@@ -112,12 +122,21 @@ class C_product extends Controller
             ]
         );
 
+        if ($request->hasFile('gambar')) {
+            $namaFile = Str::random(5) . '.' . $request->gambar->extension();
+            $request->gambar->storeAs('gambar_product', $namaFile, 'public');
+        }else{
+            $data_lama = M_product::FindOrFail($id);
+            $namaFile = $data_lama->gambar;
+        }
+
         M_product::where('id_product', $id)->update([
             'nama_product' => $request->nama_product,
             'harga' => $request->harga,
             'deskripsi_product' => $request->deskripsi_product,
-            'stok'=> $request->stok,
-            'kategori_id'=> $request->kategori
+            'stok' => $request->stok,
+            'kategori_id' => $request->kategori,
+            'gambar' => $namaFile
         ]);
 
         return redirect('/product')->with('message', 'produk berhasil di update');
@@ -125,7 +144,11 @@ class C_product extends Controller
 
     public function destroy($id)
     {
-        M_product::FindOrFail($id)->delete();
+        $product = M_product::FindOrFail($id);
+        if($product->gambar){
+            Storage::disk('public')->delete('gambar_product/'. $product->gambar);
+        }
+        $product->delete();
         return redirect('/product')->with('message', 'Produk berhasil di hapus');
     }
 }

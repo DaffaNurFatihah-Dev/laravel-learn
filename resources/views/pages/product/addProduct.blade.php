@@ -4,7 +4,7 @@
      <div class="card mt-4">
          <div class="card-header">Tambah Data Produk</div>
          <div class="card-body">
-             <form action="/product" method="POST">
+             <form action="/product" method="POST" enctype="multipart/form-data">
                  @csrf
                  <div class="row">
                      <div class="col-sm-6">
@@ -37,8 +37,17 @@
                      </div>
                      <div class="col-sm-6">
                          <div class="mb-3">
+                             <label class="form-label">Gambar Produk</label>
+                             <input type="file" name="gambar" class="form-control" value="{{ old('gambar') }}">
+                             @error('gambar')
+                                 <div class="form-text text-danger">{{ $message }}</div>
+                             @enderror
+                         </div>
+                     </div>
+                     <div class="col-sm-6">
+                         <div class="mb-3">
                              <label class="form-label">Kategori</label>
-                             <select class="form-select" aria-label="Default select example" name="kategori">
+                             <select class="custom-select" aria-label="Default select example" name="kategori">
                                  <option value="">Pilih di sini</option>
                                  @foreach ($data_kategori as $item)
                                  <option value="{{ $item->id_kategori }}">{{ $item->nama_kategori }}</option>

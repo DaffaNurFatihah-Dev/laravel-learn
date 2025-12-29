@@ -4,10 +4,27 @@
      <div class="card mt-4">
          <div class="card-header">Update Data Produk</div>
          <div class="card-body">
-             <form action="/product/{{ $product->id_product }}" method="POST">
+             <form action="/product/{{ $product->id_product }}" method="POST" enctype="multipart/form-data">
                  @method('PUT')
                  @csrf
                  <div class="row">
+                     <div class="col-sm-12">
+                         @if ($product->gambar == null)
+                             <p>Gambar Tidak ada</p>
+                         @else
+                             <img src="{{ asset('storage/gambar_product/' . $product->gambar) }}" class="img-fluid" width="200"
+                                 alt="Gambar sedang di load">
+                         @endif
+                             <div class="mb-3">
+                                 <label class="form-label">gambar</label>
+                                 <input type="file" name="gambar" class="form-control"
+                                 value="{{ old('gambar') }}">
+                                 <div class="form-text text-muted">Isi bagian ini jika anda ingin mengganti gambar yang sebelumnya</div>
+                                 @error('gambar')
+                                     <div class="form-text text-danger">{{ $message }}</div>
+                                 @enderror
+                             </div>
+                     </div>
                      <div class="col-sm-6">
                          <div class="mb-3">
                              <label class="form-label">Nama produk</label>
@@ -39,13 +56,14 @@
                      <div class="col-sm-6">
                          <div class="mb-3">
                              <label class="form-label">Kategori</label>
-                             <select class="form-select" aria-label="Default select example" name="kategori">
+                             <select class="custom-select" aria-label="Default select example" name="kategori">
                                  @foreach ($data_kategori as $item)
-                                    @if ($product->kategori_id == $item->id_kategori)
-                                         <option value="{{ $item->id_kategori }}" selected>{{ $item->nama_kategori }}</option>
-                                    @else 
-                                        <option value="{{ $item->id_kategori }}">{{ $item->nama_kategori }}</option>
-                                    @endif
+                                     @if ($product->kategori_id == $item->id_kategori)
+                                         <option value="{{ $item->id_kategori }}" selected>{{ $item->nama_kategori }}
+                                         </option>
+                                     @else
+                                         <option value="{{ $item->id_kategori }}">{{ $item->nama_kategori }}</option>
+                                     @endif
                                  @endforeach
                              </select>
                          </div>
